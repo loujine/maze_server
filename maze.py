@@ -8,7 +8,7 @@ labels = {
     "west": "West",
     "exit": "Exit"
 }
-rels = labels.keys()
+rels = ['north', 'east', 'south', 'west', 'exit']
 
 # Each cell and it's links to the other cells
 # The items of each cell correspond to the rel above
