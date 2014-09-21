@@ -1,5 +1,5 @@
 import os
-from flask import Flask, Response, request
+from flask import Flask, Response, request, abort
 from hypermedia_resource import HypermediaResource
 from hypermedia_resource.contrib.browser import BrowserAdapter
 from hypermedia_resource.wrappers import HypermediaResponse, ResponseBuilder
@@ -53,6 +53,8 @@ def cell(cell_num):
     Cell resource
     """
     resource = maze_resource(type_of='cell')
+    if not maze.has_cell(cell_num):
+        abort(404)
     links = maze.get_links_for_cell(int(cell_num))
     for rel, link in links.iteritems():
         resource.links.add(rel=rel, href=link, label=maze.labels[rel])

@@ -47,6 +47,9 @@ def link_to_cell(cell_num):
     base_iri = os.environ.get("BASE_IRI", "http://127.0.0.1:5000")
     return base_iri + '/cells/'+str(cell_num)
 
+def has_cell(cell_num):
+    return cell_num <= len(cells) - 1
+
 def get_links_for_cell(cell_num):
     """
     Generates link for a specific cell
