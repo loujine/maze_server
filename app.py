@@ -53,9 +53,10 @@ def cell(cell_num):
     Cell resource
     """
     resource = maze_resource(type_of='cell')
-    if not maze.has_cell(cell_num):
+    cell = int(cell_num)
+    if not maze.has_cell(cell):
         abort(404)
-    links = maze.get_links_for_cell(int(cell_num))
+    links = maze.get_links_for_cell(cell)
     for rel, link in links.iteritems():
         resource.links.add(rel=rel, href=link, label=maze.labels[rel])
     return maze_response(resource)
