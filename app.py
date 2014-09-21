@@ -1,3 +1,4 @@
+import os
 from flask import Flask, Response, request
 from hypermedia_resource import HypermediaResource
 from hypermedia_resource.wrappers import HypermediaResponse, ResponseBuilder
@@ -55,5 +56,5 @@ def cell(cell_num):
     return maze_response(resource)
 
 if __name__ == "__main__":
-    app.debug = True
-    app.run()
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
