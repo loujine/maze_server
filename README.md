@@ -5,7 +5,7 @@ This is an example project to show a server using the [HypermediaResource Python
 
 ## Overview
 
-The `HypermediaResource` library is used to support several different media types. It also includes a browser adapter that provides a simple HTML representation for the API, making it accessible in the browser. This method allows you to specify the hypermedia elements in general way, separate from hypermedia formats. Once the `resource` has been populated with the data, it can then be translated to any supported format.
+The Hypermedia Resource library is used to support several different media types. It also includes a browser adapter that provides a simple HTML representation for the API, making it accessible in the browser. This method allows you to specify the hypermedia elements in general way, separate from hypermedia formats. Once the `resource` has been populated with the data, it can then be translated to any supported format.
 
 The Hypermedia Resource library also provides a resource builder, which allows content negotiation to decide to which format the resource should be translated. This allows you as a developer to provide an `Accept` header and a resource to the response builder, and it will respond with the appropriate representation.
 
