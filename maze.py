@@ -1,5 +1,14 @@
+import os
+
 # Rels for links below
-rels = ['north', 'east', 'south', 'west', 'exit']
+labels = {
+    'north': "North",
+    "east": "East",
+    "south": "South",
+    "west": "West",
+    "exit": "Exit"
+}
+rels = labels.keys()
 
 # Each cell and it's links to the other cells
 # The items of each cell correspond to the rel above
@@ -35,7 +44,8 @@ def link_to_cell(cell_num):
     """
     Helper for generating links to specific cells
     """
-    return 'http://127.0.0.1:5000/cells/'+str(cell_num)
+    base_iri = os.environ.get("BASE_IRI", "http://127.0.0.1:5000")
+    return base_iri + '/cells/'+str(cell_num)
 
 def get_links_for_cell(cell_num):
     """
