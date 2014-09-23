@@ -2,11 +2,13 @@ import os
 from flask import Flask, Response, request, abort
 from hypermedia_resource import HypermediaResource
 from hypermedia_resource.contrib.browser import BrowserAdapter
+from hypermedia_resource.contrib.maze_xml import MazeXMLAdapter
 from hypermedia_resource.wrappers import HypermediaResponse, ResponseBuilder
 import maze
 
 app = Flask(__name__)
 HypermediaResource.adapters.add(BrowserAdapter)
+HypermediaResource.adapters.add(MazeXMLAdapter)
 
 # Helper functions for the views
 
