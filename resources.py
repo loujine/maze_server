@@ -1,19 +1,19 @@
-from hypermedia_resource import HypermediaResource
-from hypermedia_resource.contrib.browser import BrowserAdapter
-from hypermedia_resource.contrib.maze_xml import MazeXMLAdapter
-from hypermedia_resource.wrappers import FlaskAPIResource
+from representor import Representor
+from representor.contrib.browser import BrowserAdapter
+from representor.contrib.maze_xml import MazeXMLAdapter
+from representor.wrappers import FlaskAPIResource
 import maze
 
-HypermediaResource.adapters.add(BrowserAdapter)
-HypermediaResource.adapters.add(MazeXMLAdapter)
+Representor.adapters.add(BrowserAdapter)
+Representor.adapters.add(MazeXMLAdapter)
 
 class MazeResource(FlaskAPIResource):
 
     def maze_resource(self, type_of):
         """
-        Sets up a HypermediaResource for the resource
+        Sets up a Representor for the resource
         """
-        resource = HypermediaResource()
+        resource = Representor()
         resource.meta.attributes.add("title", "Hypermedia Maze")
         resource.meta.attributes.add("type", type_of)
         return resource
