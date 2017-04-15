@@ -1,3 +1,4 @@
+from flask import abort
 from representor import Representor
 from representor.contrib.browser import BrowserAdapter
 from representor.contrib.maze_xml import MazeXMLAdapter
