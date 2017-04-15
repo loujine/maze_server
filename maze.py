@@ -21,8 +21,8 @@ directions = {
 # Each cell and it's links to the other cells
 # The items of each cell correspond to the rel above
 cells = [
-    [None, 5, None, None, None],
-    [None, 6, None, None, None],
+    [1, None, None, None, None],
+    [None, 6, 0, None, None],
     [None, 7, 3, None, None],
     [2, None, 4, None, None],
     [3, 9, None, None, None],
