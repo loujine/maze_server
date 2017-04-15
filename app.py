@@ -2,6 +2,9 @@ import os
 from flask import Flask, Response, request, abort
 from resources import CellResource, ExitResource, RootResource
 
+import maze
+
+
 app = Flask(__name__)
 
 # Route and views
@@ -20,6 +23,10 @@ def cell(cell_num, direction):
     resource.cell_num = cell_num
     resource.direction = direction
     resp = resource.response_for(request)
+    links = maze.get_links_for_cell(resource.cell_num)
+    resp.headers.add_header('Link',
+                            u', '.join('<%s>; rel="%s"' % (v,k)
+                                       for (k,v) in links.items()))
     return resp
 
 if __name__ == "__main__":
