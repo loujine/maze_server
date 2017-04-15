@@ -10,6 +10,14 @@ labels = {
 }
 rels = ['north', 'east', 'south', 'west', 'exit']
 
+directions = {
+    'north': ['west', 'north', 'east', 'south'],
+    'east': ['north', 'east', 'south', 'west'],
+    'south': ['east', 'south', 'west', 'north'],
+    'west': ['south', 'west', 'north', 'east'],
+    'exit': ['west', 'north', 'east', 'south'],
+}
+
 # Each cell and it's links to the other cells
 # The items of each cell correspond to the rel above
 cells = [
@@ -40,12 +48,20 @@ cells = [
     [None, None, None, None, 999]
 ]
 
-def link_to_cell(cell_num):
+mini_maze = [
+    [1, None, None, None, None],
+    [None, 2, None, None, None],
+    [3, None, None, None, None],
+    [None, None, None, None, 999],
+]
+cells = mini_maze
+
+def link_to_cell(cell_num, direction):
     """
     Helper for generating links to specific cells
     """
     base_iri = os.environ.get("BASE_IRI", "http://127.0.0.1:5000")
-    return base_iri + '/cells/'+str(cell_num)
+    return '{base_iri}/cells/{cell_num}/{direction}'.format(**locals())
 
 def has_cell(cell_num):
     return cell_num <= len(cells) - 1
@@ -56,5 +72,6 @@ def get_links_for_cell(cell_num):
     """
     cell = cells[cell_num]
     cell_with_rels = dict(zip(rels, cell))
-    links = dict((k, link_to_cell(v)) for k, v in cell_with_rels.iteritems() if v)
+    links = dict((k, link_to_cell(v, directions[k][1]))
+                 for k, v in cell_with_rels.iteritems() if v)
     return links

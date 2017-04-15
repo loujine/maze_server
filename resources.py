@@ -18,6 +18,7 @@ class MazeResource(FlaskAPIResource):
         resource.meta.attributes.add("title", "Hypermedia Maze")
         if type_of == "cell":
             resource.attributes.add("Room:", self.cell_num)
+            resource.attributes.add("Direction:", maze.labels[self.direction])
         if type_of == "item":
             resource.attributes.add("Choose your way", "")
         resource.meta.attributes.add("type", type_of)
@@ -27,14 +28,15 @@ class RootResource(MazeResource):
 
     def read(self, request):
         resource = self.maze_resource(type_of='item')
-        resource.links.add(rel='start', href=maze.link_to_cell(0), label="Start")
+        resource.links.add(rel='start', href=maze.link_to_cell(0, 'north'), label="Start")
         return resource
 
 class ExitResource(MazeResource):
 
     def read(self, request):
         resource = self.maze_resource(type_of='completed')
-        resource.links.add(rel='start', href=maze.link_to_cell(0), label="Start")
+        resource.attributes.add('Congratulations!', 'You exited the maze')
+        resource.links.add(rel='start', href=maze.link_to_cell(0, 'north'), label="Restart")
         return resource
 
 class CellResource(MazeResource):

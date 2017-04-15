@@ -10,15 +10,17 @@ app = Flask(__name__)
 def root():
     return RootResource().response_for(request)
 
-@app.route('/cells/999', methods=["GET"])
-def exit():
+@app.route('/cells/999/<direction>', methods=["GET"])
+def exit(direction='north'):
     return ExitResource().response_for(request)
 
-@app.route('/cells/<int:cell_num>', methods=["GET"])
-def cell(cell_num):
+@app.route('/cells/<int:cell_num>/<direction>', methods=["GET"])
+def cell(cell_num, direction):
     resource = CellResource()
     resource.cell_num = cell_num
-    return resource.response_for(request)
+    resource.direction = direction
+    resp = resource.response_for(request)
+    return resp
 
 if __name__ == "__main__":
     app.debug = True
