@@ -6,7 +6,7 @@ from representor.wrappers import FlaskAPIResource
 import maze
 
 Representor.adapters.add(BrowserAdapter)
-Representor.adapters.add(MazeXMLAdapter)
+# Representor.adapters.add(MazeXMLAdapter)
 
 class MazeResource(FlaskAPIResource):
 
