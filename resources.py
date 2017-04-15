@@ -16,6 +16,10 @@ class MazeResource(FlaskAPIResource):
         """
         resource = Representor()
         resource.meta.attributes.add("title", "Hypermedia Maze")
+        if type_of == "cell":
+            resource.attributes.add("Room:", self.cell_num)
+        if type_of == "item":
+            resource.attributes.add("Choose your way", "")
         resource.meta.attributes.add("type", type_of)
         return resource
 
