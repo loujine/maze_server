@@ -48,4 +48,9 @@ class CellResource(MazeResource):
         links = maze.get_links_for_cell(self.cell_num)
         for rel, link in links.iteritems():
             resource.links.add(rel=rel, href=link, label=maze.labels[rel])
+        directions = maze.directions[self.direction]
+        doors = [directions[0] in links,
+                 directions[1] in links or 'exit' in links,
+                 directions[2] in links]
+        resource.img = map(lambda x: "" if x else "no", doors)
         return resource
