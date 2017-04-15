@@ -1,11 +1,11 @@
 import os
-from flask import Flask, Response, request, abort
+from flask import Flask, Response, request, abort, url_for, redirect
 from resources import CellResource, ExitResource, RootResource
 
 import maze
 
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='')
 
 # Route and views
 
@@ -28,6 +28,11 @@ def cell(cell_num, direction):
                             u', '.join('<%s>; rel="%s"' % (v,k)
                                        for (k,v) in links.items()))
     return resp
+
+@app.route('/static/<image>', methods=["GET"])
+def media(image):
+    return redirect(url_for('static', filename=image))
+
 
 if __name__ == "__main__":
     app.debug = True
